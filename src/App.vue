@@ -1,7 +1,11 @@
 <script>
-import { reactive, ref } from 'vue';
+import PacienteComp from './components/PacienteComp.vue';
 
 export default {
+  name: "App",
+  components: {
+    PacienteComp
+  },
   data() {
     return {
       gravedades: ["Baja", "Media", "Alta"],
@@ -111,6 +115,8 @@ export default {
       <p>Gravedad: {{ paciente.gravedad }}</p>
       <p>Fecha: {{ paciente.fecha }}</p>
     </div>
+
+    <PacienteComp />
   </div>
 </template>
 
