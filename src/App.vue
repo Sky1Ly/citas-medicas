@@ -47,10 +47,7 @@ export default {
           gravedad: this.datos.gravedad,
           motivo: this.datos.motivoTx
         }
-
         this.contador += 1
-
-        console.log(this.pacientes)
 
         this.datos.pacienteTx = ''
         this.textoRojo('pacienteTx')
@@ -65,6 +62,15 @@ export default {
       } else {
         alert("Debe completar todos los campos para poder guardar")
       }
+    }, 
+    eliminarPacientes(id){
+      const pacientesArray = Object.entries(this.pacientes);
+      const [key, ] = pacientesArray[id];
+      delete this.pacientes[key];
+
+      console.log(`ID Recibido: ${id}`)
+      console.log(`Pacientes ID: ${this.pacientes.id}`)
+      console.log(this.pacientes)
     }
   },
 }
@@ -109,14 +115,15 @@ export default {
     </div>
 
     <div v-for="(paciente, i) in Object.values(pacientes)" :key="i">
-      <p>Paciente: {{ paciente.paciente }}</p>
-      <p>Motivo: {{ paciente.motivo }}</p>
-      <p>Hora: {{ paciente.hora }}</p>
-      <p>Gravedad: {{ paciente.gravedad }}</p>
-      <p>Fecha: {{ paciente.fecha }}</p>
+      <PacienteComp 
+        :id="paciente.id" 
+        :paciente="paciente.paciente" 
+        :fecha="paciente.fecha" 
+        :hora="paciente.hora"
+        :motivoConsulta="paciente.motivo" 
+        :gravedad="paciente.gravedad" 
+        @eliminarPaciente="eliminarPacientes(paciente.id)"/>
     </div>
-
-    <PacienteComp />
   </div>
 </template>
 
